@@ -1,6 +1,6 @@
 const express = require('express')
 const { authMiddleware } = require("../middleware/auth.middleware")
-const { createAccountContoller, getAllAccountsController } = require("../controllers/account.controller")
+const { createAccountContoller, getUserAccountsController, getAccountBalanceController } = require("../controllers/account.controller")
 
 const router = express.Router()
 
@@ -20,6 +20,15 @@ router.post("/", authMiddleware, createAccountContoller)
  * - Protected Route
  */
 
-router.get("/", authMiddleware, getAllAccountsController)
+router.get("/", authMiddleware, getUserAccountsController)
+
+/**
+ * - GET /api/accounts/balance/:accountId
+ * - GET /api/account/balance/:accountId
+ * - Get account balance by accountId
+ * - Protected Route
+ */
+
+router.get("/balance/:accountId", authMiddleware, getAccountBalanceController)
 
 module.exports = router
